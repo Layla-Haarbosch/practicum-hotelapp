@@ -1,5 +1,6 @@
 package hotel.userinterface;
 
+import hotel.model.Boeking;
 import hotel.model.Hotel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -10,11 +11,15 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class HotelOverzichtController {
-    @FXML private Label hotelnaamLabel;
-    @FXML private ListView boekingenListView;
-    @FXML private DatePicker overzichtDatePicker;
+    @FXML
+    private Label hotelnaamLabel;
+    @FXML
+    private ListView boekingenListView;
+    @FXML
+    private DatePicker overzichtDatePicker;
 
     private Hotel hotel = Hotel.getHotel();
 
@@ -44,11 +49,16 @@ public class HotelOverzichtController {
     }
 
     public void toonBoekingen() {
-        System.out.println("toonBoekingen() is nog niet geïmplementeerd!");
         ObservableList<String> boekingen = FXCollections.observableArrayList();
+        LocalDate huidig = overzichtDatePicker.getValue();
 
-        // Vraag de boekingen op bij het Hotel-object.
-        // Voeg voor elke boeking in nette tekst (string) toe aan de boekingen-lijst.
+        for (Boeking boeking : hotel.getBoekingen()) {
+            if (!huidig.isBefore(boeking.getAankomstDatum()) && !huidig.isAfter(boeking.getVertrekDatum())) {
+                boekingen.add(boeking.getBoeker().getNaam() + ", kamer: " +
+                        boeking.getKamer().getKamerNummer() + ", begindatum: " + boeking.getAankomstDatum() + ", " +
+                        "einddatum: " + boeking.getVertrekDatum());
+            }
+        }
 
         boekingenListView.setItems(boekingen);
     }

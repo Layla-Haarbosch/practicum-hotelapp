@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
+<AnchorPane prefHeight="375.0" prefWidth="460.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hotel.userinterface.BoekingenController">
+   <children>
+      <Text fx:id="foutmelding" layoutX="39.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Voer uw gegevens in!" />
+      <Label layoutX="39.0" layoutY="62.0" text="Naam:" />
+      <TextField fx:id="naam" layoutX="168.0" layoutY="57.0" prefHeight="26.0" prefWidth="242.0" />
+      <Label layoutX="40.0" layoutY="118.0" text="Adres:" />
+      <TextField fx:id="adres" layoutX="168.0" layoutY="113.0" prefHeight="26.0" prefWidth="242.0" />
+      <Label layoutX="40.0" layoutY="162.0" text="Aankomstdatum:" />
+      <DatePicker fx:id="aankomstDatum" layoutX="168.0" layoutY="158.0" prefWidth="242.0" />
+      <Label layoutX="40.0" layoutY="218.0" text="Vertrekdatum:" />
+      <DatePicker fx:id="vertrekDatum" layoutX="168.0" layoutY="214.0" prefWidth="242.0" />
+      <Label layoutX="40.0" layoutY="272.0" text="Kamertype:" />
+      <ComboBox fx:id="kamerType" layoutX="166.0" layoutY="267.0" prefHeight="26.0" prefWidth="242.0" />
+      <Button fx:id="boek" layoutX="365.0" layoutY="325.0" mnemonicParsing="false" onAction="#boekAction" text="Boek" />
+      <Button fx:id="reset" layoutX="309.0" layoutY="325.0" mnemonicParsing="false" onAction="#resetAction" text="Reset" />
+   </children>
+</AnchorPane>

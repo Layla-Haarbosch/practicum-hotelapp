@@ -1,8 +1,6 @@
 package hotel;
 
-import hotel.model.Hotel;
-import hotel.model.Kamer;
-import hotel.model.KamerType;
+import hotel.model.*;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

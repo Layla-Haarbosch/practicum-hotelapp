@@ -5,7 +5,7 @@
     <option name="VM_PARAMETERS" value="--module-path lib --add-modules javafx.controls,javafx.fxml" />
     <extension name="coverage">
       <pattern>
-        <option name="PATTERN" value="hotel.*" />
+        <option name="PATTERN" value="hotel.userinterface.*" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>
