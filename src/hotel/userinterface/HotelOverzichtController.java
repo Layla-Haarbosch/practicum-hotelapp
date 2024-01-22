@@ -6,10 +6,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -39,12 +45,16 @@ public class HotelOverzichtController {
         overzichtDatePicker.setValue(dagLater);
     }
 
-    public void nieuweBoeking(ActionEvent actionEvent) {
-        System.out.println("nieuweBoeking() is nog niet geïmplementeerd!");
-
-        // Maak in je project een nieuwe FXML-pagina om boekingen te kunnen invoeren
+    public void nieuweBoeking(ActionEvent actionEvent) throws IOException {
         // Open de nieuwe pagina in deze methode
-        // Zorg dat de gebruiker ondertussen geen gebruik kan maken van de HotelOverzicht-pagina
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Boekingen.fxml"));
+        Parent root = loader.load();
+
+        Stage newStage = new Stage();
+        newStage.setScene(new Scene(root));
+        newStage.initModality(Modality.APPLICATION_MODAL);
+        newStage.showAndWait();
+        initialize();
         // Update na sluiten van de nieuwe pagina het boekingen-overzicht
     }
 
