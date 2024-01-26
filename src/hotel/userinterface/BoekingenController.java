@@ -51,7 +51,6 @@ public class BoekingenController {
 
     public void boekAction(ActionEvent actionEvent) throws Exception {
         Stage stage = (Stage) boek.getScene().getWindow();
-        Date today = new Date();
 
         if (this.naam.getText() != null && this.adres.getText() != null
                 && this.aankomstDatum.getValue() != null
