@@ -1,7 +1,5 @@
 package hotel.userinterface;
 
-import hotel.HotelApp;
-import hotel.model.Boeking;
 import hotel.model.Hotel;
 import hotel.model.KamerType;
 import javafx.collections.FXCollections;
@@ -14,11 +12,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.util.converter.LocalDateStringConverter;
 
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.List;
 
 public class BoekingenController {
 
@@ -52,28 +47,53 @@ public class BoekingenController {
     public void boekAction(ActionEvent actionEvent) throws Exception {
         Stage stage = (Stage) boek.getScene().getWindow();
 
-        if (this.naam.getText() != null && this.adres.getText() != null
-                && this.aankomstDatum.getValue() != null
-                && this.vertrekDatum.getValue() != null
-                && !aankomstDatum.getValue().isBefore(LocalDate.now())
-                && !vertrekDatum.getValue().isBefore(LocalDate.now())
-                && this.aankomstDatum.getValue().isBefore(this.vertrekDatum.getValue())
-                && this.kamerType.getValue() != null) {
-            LocalDate aankomst = this.aankomstDatum.getValue();
-            LocalDate vertrek = this.vertrekDatum.getValue();
-            String naam = this.naam.getText();
-            String adres = this.adres.getText();
-            KamerType kamerType = (KamerType) this.kamerType.getValue();
 
-            try {
-                Boeking boeking = hotel.voegBoekingToe(aankomst, vertrek, naam, adres, kamerType);
+        try {
+            if (this.naam.getText().isEmpty()) {
+                throw new Exception("Naam moet ingevuld zijn!");
+            }
+
+            if (this.adres.getText().isEmpty()) {
+                throw new Exception("Adres moet ingevuld zijn!");
+            }
+
+            if (this.aankomstDatum.getValue() != null && this.aankomstDatum.getValue().isBefore(LocalDate.now())) {
+                throw new Exception("Aankomstdatum moet in de toekomst liggen!");
+            }
+
+            if (this.vertrekDatum.getValue() != null && this.vertrekDatum.getValue().isBefore(LocalDate.now())) {
+                throw new Exception("Vertrekdatum moet in de toekomst liggen!");
+            }
+
+            if (this.kamerType.getValue() == null) {
+                throw new Exception("Kamertype moet geselecteer zijn!");
+            }
+
+            if (this.vertrekDatum.getValue() != null && this.aankomstDatum.getValue() != null
+                    && this.vertrekDatum.getValue().isBefore(this.aankomstDatum.getValue())) {
+                throw new Exception("Vertrekdatum komt na aankomstdatum!");
+            }
+
+            if (!this.naam.getText().isEmpty() && !this.adres.getText().isEmpty()
+                    && this.aankomstDatum.getValue() != null
+                    && this.vertrekDatum.getValue() != null
+                    && !aankomstDatum.getValue().isBefore(LocalDate.now())
+                    && !vertrekDatum.getValue().isBefore(LocalDate.now())
+                    && this.aankomstDatum.getValue().isBefore(this.vertrekDatum.getValue())
+                    && this.kamerType.getValue() != null) {
+
+                LocalDate aankomst = this.aankomstDatum.getValue();
+                LocalDate vertrek = this.vertrekDatum.getValue();
+                String naam = this.naam.getText();
+                String adres = this.adres.getText();
+                KamerType kamerType = (KamerType) this.kamerType.getValue();
+
+                hotel.voegBoekingToe(aankomst, vertrek, naam, adres, kamerType);
                 this.foutmelding.setText(null);
                 stage.close();
-            } catch (Exception ex) {
-                this.foutmelding.setText(ex.getMessage());
             }
-        } else {
-            this.foutmelding.setText("Gegevens zijn niet correct ingevuld!");
+        } catch (Exception ex) {
+            this.foutmelding.setText(ex.getMessage());
         }
     }
 
@@ -83,5 +103,6 @@ public class BoekingenController {
         this.vertrekDatum.setValue(null);
         this.aankomstDatum.setValue(null);
         this.kamerType.setValue(null);
+        this.foutmelding.setText("Voer uw gegevens in!");
     }
 }
