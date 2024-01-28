@@ -66,12 +66,20 @@ public class BoekingenController {
             }
 
             if (this.kamerType.getValue() == null) {
-                throw new Exception("Kamertype moet geselecteer zijn!");
+                throw new Exception("Kamertype moet geselecteerd zijn!");
             }
 
             if (this.vertrekDatum.getValue() != null && this.aankomstDatum.getValue() != null
                     && this.vertrekDatum.getValue().isBefore(this.aankomstDatum.getValue())) {
                 throw new Exception("Vertrekdatum komt na aankomstdatum!");
+            }
+
+            if (this.aankomstDatum.getValue() == null) {
+                throw new Exception("Aankomstdatum moet ingevuld zijn!");
+            }
+
+            if (this.vertrekDatum.getValue() == null) {
+                throw new Exception("Vertrekdatum moet ingevuld zijn!");
             }
 
             if (!this.naam.getText().isEmpty() && !this.adres.getText().isEmpty()
